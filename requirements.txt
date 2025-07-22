@@ -1,0 +1,6 @@
+langchain
+langgraph
+pydantic
+langchain_core
+langchain_together
+langchain_community
