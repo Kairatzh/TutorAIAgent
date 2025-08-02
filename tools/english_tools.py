@@ -5,14 +5,17 @@
 from langchain_core.prompts import PromptTemplate
 from langchain_core.tools import Tool
 from langchain_together import Together
-from config import API_KEY, MODEL_NAME, TEMPERATURE, MAX_TOKENS
+from configs.settings import load_configs
+
+config = load_configs()
 
 llm = Together(
-    model=MODEL_NAME,
-    temperature=TEMPERATURE,
-    max_tokens=MAX_TOKENS,
-    together_api_key=API_KEY
+    model=config["agent"]["model"],
+    temperature=config["agent"]["temperature"],
+    max_tokens=config["agent"]["max_tokens"],
+    together_api_key=config["agent"]["together_api_key"]
 )
+
 
 prompt_template = """Ты учитель Английского языка.
 Объясняй простыми словами и будь креативным.

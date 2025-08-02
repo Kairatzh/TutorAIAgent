@@ -5,15 +5,18 @@
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain.memory import ConversationBufferMemory
 from langchain_together import Together
-from config import MODEL_NAME, MAX_TOKENS, TEMPERATURE, API_KEY
+from configs.settings import load_configs
 from langchain_core.prompts import PromptTemplate
 
+config = load_configs()
+
 llm = Together(
-    model=MODEL_NAME,
-    temperature=TEMPERATURE,
-    max_tokens=MAX_TOKENS,
-    together_api_key=API_KEY
+    model=config["agent"]["model"],
+    temperature=config["agent"]["temperature"],
+    max_tokens=config["agent"]["max_tokens"],
+    together_api_key=config["agent"]["together_api_key"]
 )
+
 
 prompt_template = "Ты обычный агент для помощт человеку.Используешь чат истории: {chat_history}, отвечай на вопрос: {question}"
 prompt = PromptTemplate(
