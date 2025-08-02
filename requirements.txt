@@ -1,6 +1,7 @@
 langchain
 langgraph
 pydantic
+uvicorn
 langchain_core
 langchain_together
 langchain_community
