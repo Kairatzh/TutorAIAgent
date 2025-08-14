@@ -9,22 +9,22 @@
 """
 
 from typing import List, Dict
-
+#Импорт сторонних библиотек
 from langgraph.graph import StateGraph, END
 from langchain_core.runnables import RunnableLambda
 from pydantic import BaseModel
-
+#Импорт внутренних модулей в проекте
 from tools.math_tools import plus_tool, minus_tool
 from tools.history_tools import history_tool
 from tools.english_tools import english_tool
 from tools.classifier_tools import classification_tool
 from tools.memory import memory_runnable
 
-
+#Состояние графа
 class GraphState(BaseModel):
     text: str
     memory: List[Dict[str, str]]
-
+#Роутер для классификации математических задач
 def classify_router_math(state: GraphState):
     text = state.text.strip().lower()
     if "+" in text or "plus" in text:
@@ -33,11 +33,11 @@ def classify_router_math(state: GraphState):
         return "minus_tool"
     return "plus_tool"
 
-
+#Роутер для классификации задач на тулзы
 def classify_router(state: GraphState):
     return classification_tool.func(state.text).lower()
 
-
+#Построение графа и инициализация состояние
 workflow = StateGraph(GraphState)
 
 workflow.add_node("Main", RunnableLambda(classify_router))
@@ -47,7 +47,7 @@ workflow.add_node("English", english_tool)
 workflow.add_node("PlusMath", plus_tool)
 workflow.add_node("MinusMath", minus_tool)
 workflow.add_node("Memory", memory_runnable)
-
+#Добавление роутера 
 workflow.add_conditional_edges(
     "Main",
     classify_router,
@@ -65,13 +65,13 @@ workflow.add_conditional_edges(
         "minus_tool": "MinusMath"
     }
 )
-
+#Связь между графами
 workflow.add_edge("Memory", "Main")
 workflow.add_edge("History", END)
 workflow.add_edge("English", END)
 workflow.add_edge("PlusMath", END)
 workflow.add_edge("MinusMath", END)
-
+#Компиляция графа
 agent = workflow.compile()
 
 def agent_gen(text: str):
