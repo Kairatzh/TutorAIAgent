@@ -1,5 +1,10 @@
 """
-    classifier_tools.py
+    classifier_tools.py:
+        Тулз для взаимодействие с LLM по английскому.
+    TODO:
+        1.Убрать промты в отдельный утилиту.
+        2.Добавить memory в LLM
+        3.Соединить с состояние GraphState(ибо не будет работать только потому что агент наследует состояние при инициализации)
 """
 from langchain_core.prompts import PromptTemplate
 from langchain_core.tools import Tool
