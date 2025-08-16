@@ -10,6 +10,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.tools import Tool
 from langchain_together import Together
 
+from agent import GraphState
 from utils.prompts import classifier
 from configs.settings import load_configs
 
@@ -21,18 +22,11 @@ llm = Together(
     max_tokens=config["agent"]["max_tokens"],
     together_api_key=config["agent"]["together_api_key"]
 )
-
 prompt = classifier
-
 chain = prompt | llm
 
-def classifier_tool(text: str):
-    result = chain.invoke({"question": text})
-    return result.strip().lower()
 
+def classifier_tool(state: GraphState) -> GraphState:
+    state.answer = chain.invoke({"question": state.text})
+    return state
 
-classification_tool = Tool(
-    name="ClassifierTool",
-    description="Ты должен классифицировать текст",
-    func=classifier_tool
-)
