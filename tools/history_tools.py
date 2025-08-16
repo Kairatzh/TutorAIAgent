@@ -23,14 +23,10 @@ llm = Together(
     max_tokens=config["agent"]["max_tokens"],
     together_api_key=config["agent"]["together_api_key"]
 )
-
-
 prompt = history
-
 chain = prompt | llm
 
 def history(state: GraphState) -> GraphState:
-    result = chain.invoke({"question": state.text})
-    state.answer = result
+    state.answer = chain.invoke({"question": state.text})
     return state
 
