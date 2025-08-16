@@ -9,11 +9,11 @@
 
 
 from langchain_core.prompts import PromptTemplate
-from langchain_core.tools import Tool
 from langchain_together import Together
 
 from utils.prompts import history
 from configs.settings import load_configs
+from agent import GraphState
 
 config = load_configs()
 
@@ -29,11 +29,8 @@ prompt = history
 
 chain = prompt | llm
 
-def historic_boy(text: str) -> str:
-    return chain.invoke({"question": text})
+def history(state: GraphState) -> GraphState:
+    result = chain.invoke({"question": state.text})
+    state.answer = result
+    return state
 
-history_tool = Tool(
-    name="KazakhHistoryTool",
-    func=historic_boy,
-    description="Отвечает на вопросы по истории Казахстана простыми словами"
-)

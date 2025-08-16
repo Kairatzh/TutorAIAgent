@@ -24,6 +24,7 @@ from tools.memory import memory_runnable
 class GraphState(BaseModel):
     text: str
     memory: List[Dict[str, str]]
+    answer: str
 #Роутер для классификации математических задач
 def classify_router_math(state: GraphState):
     text = state.text.strip().lower()
