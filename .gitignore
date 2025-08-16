@@ -1,5 +1,48 @@
+# Python
 __pycache__/
 *.py[cod]
-.idea/
+*.so
 
+# Распространение
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Тестирование
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Виртуальные окружения
 .env
+.venv
+env/
+venv/
+
+# IDE
+.idea/
+.vscode/
+
+# Операционные системы
+.DS_Store
+Thumbs.db
+
+# Проект
+*.log
+logs/
+temp/
+tmp/
+data/
+models/
+*.pkl
+*.pickle
+*.json
+!configs/*.json
+!configs/*.yml
+!configs/*.yaml
+
+# Безопасность
+secrets.json
+api_keys.json
+config.json
