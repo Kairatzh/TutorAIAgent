@@ -19,12 +19,8 @@ from tools.history_tools import history_tool
 from tools.english_tools import english_tool
 from tools.classifier_tools import classification_tool
 from tools.memory import memory_runnable
+from utils.states import GraphState
 
-#Состояние графа
-class GraphState(BaseModel):
-    text: str
-    memory: List[Dict[str, str]]
-    answer: str
 #Роутер для классификации математических задач
 def classify_router_math(state: GraphState):
     text = state.text.strip().lower()

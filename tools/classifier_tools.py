@@ -10,7 +10,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.tools import Tool
 from langchain_together import Together
 
-from agent import GraphState
+from utils.states import GraphState
 from utils.prompts import classifier
 from configs.settings import load_configs
 

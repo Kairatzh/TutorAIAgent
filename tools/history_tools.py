@@ -13,7 +13,7 @@ from langchain_together import Together
 
 from utils.prompts import history
 from configs.settings import load_configs
-from agent import GraphState
+from utils.states import GraphState
 
 config = load_configs()
 
