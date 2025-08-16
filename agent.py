@@ -15,9 +15,9 @@ from langchain_core.runnables import RunnableLambda
 from pydantic import BaseModel
 #Импорт внутренних модулей в проекте
 from tools.math_tools import plus_tool, minus_tool
-from tools.history_tools import history_tool
-from tools.english_tools import english_tool
-from tools.classifier_tools import classification_tool
+from tools.history_tools import history
+from tools.english_tools import english_answer
+from tools.classifier_tools import classifier_tool
 from tools.memory import memory_runnable
 from utils.states import GraphState
 
@@ -32,15 +32,15 @@ def classify_router_math(state: GraphState):
 
 #Роутер для классификации задач на тулзы
 def classify_router(state: GraphState):
-    return classification_tool.func(state.text).lower()
+    return classifier_tool.func(state.text).lower()
 
 #Построение графа и инициализация состояние
 workflow = StateGraph(GraphState)
 
 workflow.add_node("Main", RunnableLambda(classify_router))
 workflow.add_node("Math", RunnableLambda(classify_router_math))
-workflow.add_node("History", history_tool)
-workflow.add_node("English", english_tool)
+workflow.add_node("History", history)
+workflow.add_node("English", english_answer)
 workflow.add_node("PlusMath", plus_tool)
 workflow.add_node("MinusMath", minus_tool)
 workflow.add_node("Memory", memory_runnable)
