@@ -9,6 +9,8 @@
 from langchain_core.prompts import PromptTemplate
 from langchain_core.tools import Tool
 from langchain_together import Together
+
+from utils.prompts import classifier
 from configs.settings import load_configs
 
 config = load_configs()
@@ -20,14 +22,7 @@ llm = Together(
     together_api_key=config["agent"]["together_api_key"]
 )
 
-prompt_template = """Ты классифицируешь ввод пользователя на такие группы(Math, History, English).Вывод должен быть одним из этих слов.
-Ввод ученика: {question}
-Твой вывод:"""
-
-prompt = PromptTemplate(
-    template=prompt_template,
-    input_variables=["question"]
-)
+prompt = classifier
 
 chain = prompt | llm
 

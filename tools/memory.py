@@ -5,8 +5,9 @@
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain.memory import ConversationBufferMemory
 from langchain_together import Together
+
 from configs.settings import load_configs
-from langchain_core.prompts import PromptTemplate
+from utils.prompts import memory_prompt
 
 config = load_configs()
 
@@ -18,11 +19,7 @@ llm = Together(
 )
 
 
-prompt_template = "Ты обычный агент для помощт человеку.Используешь чат истории: {chat_history}, отвечай на вопрос: {question}"
-prompt = PromptTemplate(
-    input_variables=["chat_history", "question"],
-    template=prompt_template
-)
+prompt = memory_prompt
 
 chain = prompt | llm
 

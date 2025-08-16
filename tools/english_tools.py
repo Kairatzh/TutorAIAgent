@@ -10,6 +10,8 @@
 from langchain_core.prompts import PromptTemplate
 from langchain_core.tools import Tool
 from langchain_together import Together
+
+from utils.prompts import english
 from configs.settings import load_configs
 
 config = load_configs()
@@ -22,15 +24,7 @@ llm = Together(
 )
 
 
-prompt_template = """Ты учитель Английского языка.
-Объясняй простыми словами и будь креативным.
-Вопрос ученика: {question}
-Твой ответ:"""
-
-prompt = PromptTemplate(
-    template=prompt_template,
-    input_variables=["question"]
-)
+prompt = english
 
 chain = prompt | llm
 
