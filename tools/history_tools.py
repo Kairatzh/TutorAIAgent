@@ -17,15 +17,18 @@ from utils.states import GraphState
 
 config = load_configs()
 
+#LLM конфигурация
 llm = Together(
     model=config["agent"]["model"],
     temperature=config["agent"]["temperature"],
     max_tokens=config["agent"]["max_tokens"],
     together_api_key=config["agent"]["together_api_key"]
 )
+#Промпт и цепочка действий
 prompt = history
 chain = prompt | llm
 
+#Тулз для ответа на вопросы по истории 
 def history(state: GraphState) -> GraphState:
     state.answer = chain.invoke({"question": state.text})
     return state
