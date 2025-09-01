@@ -1,7 +1,7 @@
-langchain
-langgraph
-pydantic
-uvicorn
-langchain_core
-langchain_together
-langchain_community
+langchain #Библиотека для работы с LLM
+langgraph #Библиотека для работы с графами
+pydantic #Библиотека для работы с данными
+uvicorn #Сервер для запуска приложения 
+langchain_core #Библиотека для работы с языковыми моделями
+langchain_together #Библиотека для работы с Together API
+langchain_community #Библиотека для работы с сообщениями
