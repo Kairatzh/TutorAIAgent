@@ -77,8 +77,3 @@ def agent_gen(text: str):
         config={"configurable": {"session_id": "user1"}}
         )
     return result
-
-
-print(agent_gen("Сколько будет 12 плюс 30?"))
-print(agent_gen("Как образуется Present Continuous?"))
-print(agent_gen("Когда была Великая Отечественная война?"))
