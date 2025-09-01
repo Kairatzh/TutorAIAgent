@@ -9,10 +9,10 @@ description = "Интеллектуальный агент-репетитор н
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Kairat", email = "zhaksylykov.k06@gmail.com"}
+    {name = "KairatZhaksylykov", email = "zhaksylykov.k06@gmail.com"}
 ]
 maintainers = [
-    {name = "Kairat", email = "zhaksylykov.k06@gmail.com"}
+    {name = "KairatZhaksylykov", email = "zhaksylykov.k06@gmail.com"}
 ]
 keywords = ["ai", "langchain", "langgraph", "tutor", "education", "chatbot"]
 classifiers = [
