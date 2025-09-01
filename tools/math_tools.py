@@ -18,12 +18,12 @@ def minus(a):
 
 plus_tool = Tool(
         name="PlusTool",
-        description="",
+        description="Получает на вход строку с двумя числами и возвращает их сумму",
         func=lambda x: plus(x)
     )
 
 minus_tool = Tool(
         name="MinusTool",
-        description="",
+        description="Получает на вход строку с двумя числами и возвращает их разность",
         func=lambda x: minus(x)
     )
