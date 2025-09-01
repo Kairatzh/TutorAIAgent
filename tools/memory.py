@@ -11,16 +11,15 @@ from utils.prompts import memory_prompt
 
 config = load_configs()
 
+#LLM конфигурация
 llm = Together(
     model=config["agent"]["model"],
     temperature=config["agent"]["temperature"],
     max_tokens=config["agent"]["max_tokens"],
     together_api_key=config["agent"]["together_api_key"]
 )
-
-
+#Промпт и цепочка действий
 prompt = memory_prompt
-
 chain = prompt | llm
 
 # обернуть chain в Runnable с памятью
